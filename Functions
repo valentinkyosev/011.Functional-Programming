@@ -1,0 +1,65 @@
+------------------------------------------
+ex.01 Anonymous functions
+------------------------------------------
+using System;
+using System.Collections.Generic;
+
+namespace ex._01_Anonymous_functions
+{
+
+    class Program
+    {
+        static void Main()
+        {
+            // Списък от числа, който ще се сортира
+            List<int> numbers = new List<int> { 5, 2, 8, 3, 1 };
+
+            // Сортиране на списъка чрез анонимна функция
+            numbers.Sort((a, b) => a.CompareTo(b));
+
+            // Извеждане на сортирания списък
+            Console.WriteLine(string.Join(", ", numbers)); // Извеждане на: 1, 2, 3, 5, 8
+        }
+    }
+}
+
+------------------------------------------
+ex.02 Functions with internal state
+------------------------------------------
+using System;
+using System.Collections.Generic;
+
+namespace ex._02_Functions_with_internal_state
+{
+    class Program
+    {
+        static void Main()
+        {
+            Func<Func<int, int>, Func<int, int>> memoize = Memoize<int, int>();
+
+            Func<int, int> square = x => x * x;
+
+            Func<int, int> memoizedSquare = memoize(square);
+
+            Console.WriteLine(memoizedSquare(4));
+            Console.WriteLine(memoizedSquare(5));
+            Console.WriteLine(memoizedSquare(4));
+        }
+        static Func<Func<TArg, TResult>, Func<TArg, TResult>> Memoize<TArg, TResult>()
+        {
+            var cache = new Dictionary<TArg, TResult>();
+            return func =>
+            {
+                return arg =>
+                {
+                    if (!cache.TryGetValue(arg, out TResult result))
+                    {
+                        result = func(arg);
+                        cache[arg] = result;
+                    }
+                    return result;
+                };
+            };
+        }
+    }
+}
