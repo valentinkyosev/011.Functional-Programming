@@ -1,0 +1,133 @@
+ex.01 Abstraction through functions
+--------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ex._01_Abstraction_through_functions
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+            // Функция за филтриране - връща само четните числа
+            Func<int, bool> isEven = x => x % 2 == 0;
+
+            // Функция за мапиране - удвоява всяко число
+            Func<int, int> doubleNumber = x => x * 2;
+
+            // Функция за намаляване (reduce) - събира всички числа
+            Func<int, int, int> sum = (acc, x) => acc + x;
+
+            // Филтриране на четните числа
+            var evens = numbers.Where(isEven);
+
+            // Удвояване на всяко число
+            var doubled = numbers.Select(doubleNumber);
+
+            // Събиране на всички числа
+            var total = numbers.Aggregate(sum);
+
+            Console.WriteLine("Четни числа: " + string.Join(", ", evens));
+            Console.WriteLine("Удвоени числа: " + string.Join(", ", doubled));
+            Console.WriteLine("Сума на всички числа: " + total);
+        }
+    }
+}
+
+------------------------------------------------
+ex.02 Summing the items in a list
+------------------------------------------------
+using System;
+
+namespace ex._02_Summing_the_items_in_a_list
+{
+    using System;
+    using System.Linq;
+    using System.Collections.Generic;
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
+
+            int sum = numbers.Sum();
+
+            Console.WriteLine("Сума: " + sum);
+        }
+    }
+}
+
+------------------------------------------------
+ex.03 Filter the items in a list
+------------------------------------------------
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace ex._03_Filter_the_items_in_a_list
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
+
+            var evenNumbers = numbers.Where(x => x % 2 == 0);
+
+            Console.WriteLine("Четни числа: " + string.Join(", ", evenNumbers));
+        }
+    }
+}
+
+------------------------------------------------
+ex.04.Mapping the items in a list
+------------------------------------------------
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace ex._04_Mapping_the_items_in_a_list
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
+
+            var squaredNumbers = numbers.Select(x => x * x);
+
+            Console.WriteLine("Квадрати на числата: " + string.Join(", ", squaredNumbers));
+        }
+    }
+}
+
+-----------------------------------------------
+ex.05 Finding a min max element in a list
+-----------------------------------------------
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace ex._05_Finding_a_min_max_element_in_a_list
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
+
+            int minNumber = numbers.Min();
+            int maxNumber = numbers.Max();
+
+            Console.WriteLine("Минимално число: " + minNumber);
+            Console.WriteLine("Максимално число: " + maxNumber);
+        }
+    }
+}
+
+
+
